@@ -139,6 +139,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "/media/"
 
 if not IS_LOCAL_MEDIA_ALLOWED:
-    raise ImproperlyConfigured('media storage should be in a cloud bucket')
+    raise ImproperlyConfigured("media storage should be in a cloud bucket")
 else:
     MEDIA_ROOT = BASE_DIR / "media"

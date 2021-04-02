@@ -1,0 +1,19 @@
+{
+  "name": "Hammer Shell",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app-shell",
+  "workspaceFolder": "/project",
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "ms-python.python"
+  ],
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "terminal.integrated.shell.linux": null
+  },
+  "forwardPorts": []
+}

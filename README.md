@@ -60,4 +60,8 @@ make serve.app-wsgi
 
 ## Test
 
+(TBD)
+
 ## Deploy
+
+(TBD)
