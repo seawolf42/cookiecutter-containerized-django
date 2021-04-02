@@ -1,0 +1,21 @@
+# primary dependencies
+django
+django-debug-toolbar
+django-environ
+pillow
+psycopg2-binary
+uwsgi
+whitenoise
+
+# package management
+pip
+pip-tools
+
+# linting
+black==20.8b1
+flake8
+
+# testing
+mock
+pytest
+pytest-mock
