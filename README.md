@@ -20,9 +20,34 @@ You will need accounts on the following platforms:
 
 ## Initial Setup and Execution
 
+```bash
+make build
+make serve
+```
+
+> API is available at <http://localhost:8000>.
+
 ## Subsequent Execution
 
+```bash
+make serve
+```
+
 ## Logging In
+
+## WSGI App
+
+The app can also be run in WSGI mode; this configuration can be started by running the `app-wsgi` container:
+
+```bash
+make serve.app-wsgi
+```
+
+> API is available at <http://localhost:8001>
+
+## Local Development
+
+(TBD)
 
 ## Test
 

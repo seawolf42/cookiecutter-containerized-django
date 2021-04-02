@@ -1,0 +1,90 @@
+version: '3.9'
+
+services:
+  app-base:
+    build: app
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    environment:
+      - SECRET_KEY=abcdefghijklmnopqrstuvwxyz
+      - DATABASE_URL=postgres://hammer:hammer@db/hammer
+
+  app:
+    extends:
+      service: app-base
+    container_name: hammer-app
+    command: make serve
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - .:/project
+    ports:
+      - '8000:8000'
+    environment:
+      - IS_LOCAL_ENVIRONMENT=true
+      - DEBUG=true
+      - DEBUG_TOOLBAR=true
+
+  app-shell:
+    extends:
+      service: app-base
+    container_name: hammer-app-shell
+    command: bash
+    restart: always
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/project
+    working_dir: /project
+
+  app-wsgi:
+    extends:
+      service: app-base
+    container_name: hammer-app-wsgi
+    command: make serve.safe
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - '8001:8000'
+    environment:
+      - IS_LOCAL_MEDIA_ALLOWED=true
+
+  db:
+    image: postgres:13.1-alpine
+    container_name: hammer-db
+    restart: always
+    volumes:
+      - postgres:/pgdata
+    environment:
+      - POSTGRES_DB=hammer
+      - POSTGRES_USER=hammer
+      - POSTGRES_PASSWORD=hammer
+      - PGDATA=/pgdata
+      - PS1=xxx
+
+  db-shell:
+    extends:
+      service: db
+    container_name: hammer-db-shell
+    command: bash
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/project
+    working_dir: /project
+    environment:
+      - PGPASSWORD=hammer
+
+networks:
+  default:
+    name: hammer-default
+
+volumes:
+  postgres:
