@@ -35,6 +35,15 @@ make serve
 
 ## Logging In
 
+The following accounts exist and can be logged in with username/password:
+
+| username | password |
+| -------- | -------- |
+| root     | (none)   |
+| dev      | `dev`    |
+| alice    | `alice`  |
+| bob      | `bob`    |
+
 ## WSGI App
 
 The app can also be run in WSGI mode; this configuration can be started by running the `app-wsgi` container:
