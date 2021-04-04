@@ -65,7 +65,7 @@ services:
     volumes:
       - db-data:/pgdata
       - ./data/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
-      - ./data/dumps:/project/data/dumps:ro
+      - ./data/dumps:/project/data/dumps
     environment:
       - POSTGRES_DB=hammer
       - POSTGRES_USER=hammer
