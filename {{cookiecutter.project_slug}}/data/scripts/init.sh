@@ -1,4 +1,4 @@
 #!/bin/sh
 
-psql -U hammer < /project/data/dumps/schema.sql
-psql -U hammer < /project/data/dumps/base.sql
+psql -U {{ cookiecutter.project_slug }} < /project/data/dumps/schema.sql
+psql -U {{ cookiecutter.project_slug }} < /project/data/dumps/base.sql

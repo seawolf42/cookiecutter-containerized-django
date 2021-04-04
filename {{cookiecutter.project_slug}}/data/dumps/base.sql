@@ -17,7 +17,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Data for Name: accounts_user; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: accounts_user; Type: TABLE DATA; Schema: public
 --
 
 COPY public.accounts_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
@@ -29,7 +29,7 @@ COPY public.accounts_user (id, password, last_login, is_superuser, username, fir
 
 
 --
--- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public
 --
 
 COPY public.auth_group (id, name) FROM stdin;
@@ -37,7 +37,7 @@ COPY public.auth_group (id, name) FROM stdin;
 
 
 --
--- Data for Name: accounts_user_groups; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: accounts_user_groups; Type: TABLE DATA; Schema: public
 --
 
 COPY public.accounts_user_groups (id, user_id, group_id) FROM stdin;
@@ -45,7 +45,7 @@ COPY public.accounts_user_groups (id, user_id, group_id) FROM stdin;
 
 
 --
--- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public
 --
 
 COPY public.django_content_type (id, app_label, model) FROM stdin;
@@ -59,7 +59,7 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 
 
 --
--- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public
 --
 
 COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
@@ -91,7 +91,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 
 
 --
--- Data for Name: accounts_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: accounts_user_user_permissions; Type: TABLE DATA; Schema: public
 --
 
 COPY public.accounts_user_user_permissions (id, user_id, permission_id) FROM stdin;
@@ -99,7 +99,7 @@ COPY public.accounts_user_user_permissions (id, user_id, permission_id) FROM std
 
 
 --
--- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public
 --
 
 COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
@@ -107,7 +107,7 @@ COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
 
 
 --
--- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: hammer
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
@@ -134,63 +134,63 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 
 --
--- Name: accounts_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: accounts_user_groups_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.accounts_user_groups_id_seq', 1, false);
 
 
 --
--- Name: accounts_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: accounts_user_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.accounts_user_id_seq', 4, true);
 
 
 --
--- Name: accounts_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: accounts_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.accounts_user_user_permissions_id_seq', 1, false);
 
 
 --
--- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
 
 
 --
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.auth_permission_id_seq', 24, true);
 
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
 
 
 --
--- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.django_content_type_id_seq', 6, true);
 
 
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: hammer
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
 SELECT pg_catalog.setval('public.django_migrations_id_seq', 19, true);

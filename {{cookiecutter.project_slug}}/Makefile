@@ -1,4 +1,4 @@
-PROJECT ?= hammer
+PROJECT ?= {{ cookiecutter.project_slug }}
 
 DOCKER ?= docker
 DOCKER_COMPOSE ?= docker-compose
@@ -33,7 +33,7 @@ run.%:
 
 .PHONY: run.db-cli
 run.db-cli:
-	${RUN} --entrypoint "psql -h db -U hammer" db-shell
+	${RUN} --entrypoint "psql -h db -U {{ cookiecutter.project_slug }}" db-shell
 
 .PHONY: run.app-shell
 run.app-shell:

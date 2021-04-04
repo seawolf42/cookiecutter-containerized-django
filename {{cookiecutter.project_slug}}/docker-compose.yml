@@ -12,12 +12,12 @@ services:
     environment:
       - PYTHONPYCACHEPREFIX=/cache/python
       - SECRET_KEY=abcdefghijklmnopqrstuvwxyz
-      - DATABASE_URL=postgres://hammer:hammer@db/hammer
+      - DATABASE_URL=postgres://{{ cookiecutter.project_slug }}:{{ cookiecutter.project_slug }}@db/{{ cookiecutter.project_slug }}
 
   app:
     extends:
       service: app-base
-    container_name: hammer-app
+    container_name: {{ cookiecutter.project_slug }}-app
     command: make serve
     restart: always
     depends_on:
@@ -34,7 +34,7 @@ services:
   app-shell:
     extends:
       service: app-base
-    container_name: hammer-app-shell
+    container_name: {{ cookiecutter.project_slug }}-app-shell
     command: bash
     restart: always
     depends_on:
@@ -48,7 +48,7 @@ services:
   app-wsgi:
     extends:
       service: app-base
-    container_name: hammer-app-wsgi
+    container_name: {{ cookiecutter.project_slug }}-app-wsgi
     command: make serve.safe
     restart: always
     depends_on:
@@ -60,22 +60,22 @@ services:
 
   db:
     image: postgres:13.1-alpine
-    container_name: hammer-db
+    container_name: {{ cookiecutter.project_slug }}-db
     restart: always
     volumes:
       - db-data:/pgdata
       - ./data/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
       - ./data/dumps:/project/data/dumps
     environment:
-      - POSTGRES_DB=hammer
-      - POSTGRES_USER=hammer
-      - POSTGRES_PASSWORD=hammer
+      - POSTGRES_DB={{ cookiecutter.project_slug }}
+      - POSTGRES_USER={{ cookiecutter.project_slug }}
+      - POSTGRES_PASSWORD={{ cookiecutter.project_slug }}
       - PGDATA=/pgdata
 
   db-shell:
     extends:
       service: db
-    container_name: hammer-db-shell
+    container_name: {{ cookiecutter.project_slug }}-db-shell
     command: bash
     depends_on:
       - db
@@ -85,11 +85,11 @@ services:
       - .:/project:ro
     working_dir: /project
     environment:
-      - PGPASSWORD=hammer
+      - PGPASSWORD={{ cookiecutter.project_slug }}
 
 networks:
   default:
-    name: hammer-default
+    name: {{ cookiecutter.project_slug }}-default
 
 volumes:
   app-media:

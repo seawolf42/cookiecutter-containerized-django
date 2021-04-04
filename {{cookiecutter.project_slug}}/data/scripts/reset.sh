@@ -1,7 +1,7 @@
 #!/bin/sh
 
-dropdb hammer --if-exists -h db -U hammer
-createdb hammer -h db -U hammer
+dropdb {{ cookiecutter.project_slug }} --if-exists -h db -U {{ cookiecutter.project_slug }}
+createdb {{ cookiecutter.project_slug }} -h db -U {{ cookiecutter.project_slug }}
 
-psql -h db -U hammer < /project/data/dumps/schema.sql
-psql -h db -U hammer < /project/data/dumps/base.sql
+psql -h db -U {{ cookiecutter.project_slug }} < /project/data/dumps/schema.sql
+psql -h db -U {{ cookiecutter.project_slug }} < /project/data/dumps/base.sql
