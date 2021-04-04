@@ -32,6 +32,8 @@ DATABASE_URL = env.db()
 DEBUG = False if IS_PRODUCTION else env.bool("DEBUG", False)
 DEBUG_TOOLBAR = False if IS_PRODUCTION else DEBUG and env.bool("DEBUG_TOOLBAR", False)
 
+CACHE_DIR = pathlib.Path('/cache')
+
 
 # project settings
 
@@ -123,7 +125,7 @@ USE_TZ = True
 # static files
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "collected-static"
+STATIC_ROOT = CACHE_DIR / "static"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = (BASE_DIR / "static",)
 STATICFILES_FINDERS = (
@@ -141,4 +143,4 @@ MEDIA_URL = "/media/"
 if not IS_LOCAL_MEDIA_ALLOWED:
     raise ImproperlyConfigured("media storage should be in a cloud bucket")
 else:
-    MEDIA_ROOT = BASE_DIR / "media"
+    MEDIA_ROOT = CACHE_DIR / "media"

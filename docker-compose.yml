@@ -4,9 +4,13 @@ services:
   app-base:
     build: app
     volumes:
-      - ./app:/app
+      - app-pycache:/cache/python
+      - app-static:/cache/static
+      - app-media:/cache/media
+      - ./app:/app:ro
     working_dir: /app
     environment:
+      - PYTHONPYCACHEPREFIX=/cache/python
       - SECRET_KEY=abcdefghijklmnopqrstuvwxyz
       - DATABASE_URL=postgres://hammer:hammer@db/hammer
 
@@ -59,9 +63,9 @@ services:
     container_name: hammer-db
     restart: always
     volumes:
-      - postgres:/pgdata
-      - ./data/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
-      - ./data/dumps:/project/data/dumps
+      - db-data:/pgdata
+      - ./data/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+      - ./data/dumps:/project/data/dumps:ro
     environment:
       - POSTGRES_DB=hammer
       - POSTGRES_USER=hammer
@@ -78,7 +82,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - .:/project
+      - .:/project:ro
     working_dir: /project
     environment:
       - PGPASSWORD=hammer
@@ -88,4 +92,7 @@ networks:
     name: hammer-default
 
 volumes:
-  postgres:
+  app-media:
+  app-pycache:
+  app-static:
+  db-data:
