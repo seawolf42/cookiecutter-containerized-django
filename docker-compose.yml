@@ -60,12 +60,13 @@ services:
     restart: always
     volumes:
       - postgres:/pgdata
+      - ./data/scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./data/dumps:/project/data/dumps
     environment:
       - POSTGRES_DB=hammer
       - POSTGRES_USER=hammer
       - POSTGRES_PASSWORD=hammer
       - PGDATA=/pgdata
-      - PS1=xxx
 
   db-shell:
     extends:
