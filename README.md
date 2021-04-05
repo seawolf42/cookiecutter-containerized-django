@@ -17,6 +17,16 @@ The following opinions guide the decisions around structuring this project:
 <dd>configuration should be declarative; this includes definitions for environments and services, run-time configuration, and tooling for building and deploying the app</dd>
 </dl>
 
+## Quickstart
+
+At the moment, creating a new project from the template requires a separate installation of `cookiecutter`, which then requires Python. The irony of this is not lost on the author, and fixing this is high on the list of priorities.
+
+```bash
+python -m cookiecutter gh:seawolf42/cookiecutter-containerized-django
+```
+
+That's it! `cd` into the new dirctory and follow the README there to get everything running for the first time.
+
 ## Starter Project
 
 The OOTB application is a fully-configured [Django](https://www.djangoproject.com/) application. This is meant predominantly to show how to configure all the services and tooling for a typical applicaton stack. The stack currently include Django and some common tooling for building with Django, a [Postgres](https://www.postgresql.org/) database, and tools like PSQL necessary for interaction with these services.
