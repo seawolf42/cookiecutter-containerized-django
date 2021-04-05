@@ -1,4 +1,4 @@
-# Django
+# {{ cookiecutter.project_name }}
 
 This is a demonstration of how to set up and use a fully-containerized local development environment. This maximizes the similarity both when developing on machines with different configurations and between running locally and running in production.
 
@@ -62,6 +62,27 @@ make serve.app-wsgi
 
 (TBD)
 
+## Pausing Development
+
+You can stop the project fully and re-start it again at a future time. To stop everything:
+
+```bash
+make stop
+```
+
+This takes down any containers but leaves volumes (for database state and user uploads locally) intact.
+
 ## Deploy
 
 (TBD)
+
+## Tear-Down
+
+The application can be completely brought down by performing the following steps:
+
+```bash
+docker-compose down
+docker volume rm $(docker volume ls -q -f dangling=true)
+```
+
+You may also need to remove images from Docker; look for images starting with `{{ cookiecutter.project_slug }}-` as well as the `postgres` container(s) used recently.
