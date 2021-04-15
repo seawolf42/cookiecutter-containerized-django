@@ -8,6 +8,8 @@ This is a demonstration of how to set up and use a fully-containerized local dev
 
 You will need accounts on the following platforms:
 
+-   [Github](https://github.com/)
+-   [Google Cloud Platform](https://console.cloud.google.com/)
 -   [Docker Hub](https://hub.docker.com/)
 
 ### Software
@@ -32,6 +34,8 @@ make serve
 ```bash
 make serve
 ```
+
+> API is available at <http://localhost:8001>
 
 ## Logging In
 

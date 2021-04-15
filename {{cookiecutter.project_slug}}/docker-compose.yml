@@ -92,7 +92,7 @@ networks:
     name: {{ cookiecutter.project_slug }}-default
 
 volumes:
-  app-media:
-  app-pycache:
-  app-static:
-  db-data:
+  app-media: {}
+  app-pycache: {}
+  app-static: {}
+  db-data: {}
