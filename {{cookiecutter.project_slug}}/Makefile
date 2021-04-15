@@ -51,3 +51,8 @@ test:
 data.%: export DOCKER_RUN ?= ${RUN}
 data.%:
 	${MAKE} -C data ${*}
+
+.PHONY: tools.%
+tools.%: export DOCKER_RUN ?= ${RUN}
+tools.%:
+	${MAKE} -C tools ${*}

@@ -4,15 +4,38 @@
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Path": "/usr/local/bin/flake8",
   "python.formatting.blackPath": "/usr/local/bin/black",
-  "python.formatting.blackArgs": ["--line-length=120"],
-  "emmet.includeLanguages": { "django-html": "html" },
-  "[python]": { "editor.defaultFormatter": null },
-  "[django-html]": { "editor.defaultFormatter:": null },
+  "python.formatting.blackArgs": [
+    "--line-length=120",
+    "--exclude='app/apps/*/migrations/*'"
+  ],
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "[python]": {
+    "editor.defaultFormatter": null
+  },
+  "[django-html]": {
+    "editor.defaultFormatter:": null
+  },
   "terminal.integrated.allowChords": false,
-  "files.exclude": {},
-  "search.exclude": {},
   "files.associations": {
     "*.html": "html",
     "**/templates/**/*.html": "django-html"
-  }
+  },
+  "files.exclude": {
+    "app/collected-static": true,
+    "app/media": true,
+    ".devcontainer": true,
+    ".vscode": true,
+    ".editorconfig": true,
+    ".flake8": true,
+    ".gitignore": true,
+    ".prettierignore": true,
+    ".prettierrc": true,
+    ".vsls.json": true,
+    "docker-compose.yml": true,
+    "services": true,
+    "tools": true
+  },
+  "search.exclude": {}
 }
