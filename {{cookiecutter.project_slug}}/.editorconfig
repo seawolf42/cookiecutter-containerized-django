@@ -19,7 +19,7 @@ insert_final_newline = true
 [*.{css,jinja,js,json,jsx,rules,tf,ts,tsx,yaml,yml}]
 indent_size = 2
 
-[*.md]
+[*.{md,sql}]
 trim_trailing_whitespace = false
 
 [Makefile]

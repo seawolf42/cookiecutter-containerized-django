@@ -1,5 +1,5 @@
 {
-  "name": "Hammer Shell",
+  "name": "{{ cookiecutter.project_name }} Shell",
   "dockerComposeFile": ["../docker-compose.yml"],
   "service": "app-shell",
   "workspaceFolder": "/project",
