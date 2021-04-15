@@ -2,8 +2,6 @@ import pathlib
 
 import environ
 
-from django.core.exceptions import ImproperlyConfigured
-
 
 # build paths like: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -19,6 +17,8 @@ env = environ.Env()
 IS_PRODUCTION = not env.bool("IS_LOCAL_ENVIRONMENT", default=False)
 IS_LOCAL_MEDIA_ALLOWED = env("IS_LOCAL_MEDIA_ALLOWED", default=False) if IS_PRODUCTION else True
 
+GS_BUCKET_NAME = env("DJANGO_STORAGE_BUCKET", default="" if IS_LOCAL_MEDIA_ALLOWED else None)
+
 
 #
 # all config beyond this point is identical across environments
@@ -32,16 +32,17 @@ DATABASE_URL = env.db()
 DEBUG = False if IS_PRODUCTION else env.bool("DEBUG", False)
 DEBUG_TOOLBAR = False if IS_PRODUCTION else DEBUG and env.bool("DEBUG_TOOLBAR", False)
 
-CACHE_DIR = pathlib.Path('/cache')
+CACHE_ROOT = pathlib.Path("/cache")
 
 
 # project settings
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-DATABASES = dict(default=DATABASE_URL)
-
 ALLOWED_HOSTS = ("*",)
+
+DATABASES = dict(default=DATABASE_URL)
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 ROOT_URLCONF = "config.urls"
 
@@ -66,14 +67,18 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE = (
+    # force early
     "django.middleware.security.SecurityMiddleware",  # should be first
     "whitenoise.middleware.WhiteNoiseMiddleware",  # must go immediately after security
+    # primary
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # third-party
+    # none
 )
 
 TEMPLATES = (
@@ -125,8 +130,8 @@ USE_TZ = True
 # static files
 
 STATIC_URL = "/static/"
-STATIC_ROOT = CACHE_DIR / "static"
-STATIC_URL = "/static/"
+
+STATIC_ROOT = CACHE_ROOT / "static"
 STATICFILES_DIRS = (BASE_DIR / "static",)
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -140,7 +145,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 
-if not IS_LOCAL_MEDIA_ALLOWED:
-    raise ImproperlyConfigured("media storage should be in a cloud bucket")
+if GS_BUCKET_NAME:
+    DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
 else:
-    MEDIA_ROOT = CACHE_DIR / "media"
+    MEDIA_ROOT = CACHE_ROOT / "media"

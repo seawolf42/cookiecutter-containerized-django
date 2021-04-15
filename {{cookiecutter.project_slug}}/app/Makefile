@@ -2,7 +2,7 @@ PYTHON ?= python
 PIP_COMPILE ?= pip-compile --generate-hashes --allow-unsafe
 
 MANAGE ?= ${PYTHON} manage.py
-BLACK ?= ${PYTHON} -m black --line-length=120 .
+BLACK ?= ${PYTHON} -m black --line-length=120 --exclude='apps/migrations/*' .
 
 .PHONY: serve
 serve:

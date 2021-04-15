@@ -2,6 +2,7 @@
 django
 django-debug-toolbar
 django-environ
+django-storages[google]
 pillow
 psycopg2-binary
 uwsgi

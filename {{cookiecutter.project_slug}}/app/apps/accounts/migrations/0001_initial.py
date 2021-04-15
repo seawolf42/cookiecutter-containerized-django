@@ -107,7 +107,7 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "ordering": ("id",),
+                "ordering": ("username",),
             },
             managers=[
                 ("objects", django.contrib.auth.models.UserManager()),
