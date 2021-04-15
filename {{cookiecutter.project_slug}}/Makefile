@@ -3,11 +3,7 @@ PROJECT ?= {{ cookiecutter.project_slug }}
 DOCKER ?= docker
 DOCKER_COMPOSE ?= docker-compose
 
-BUILD ?= ${DOCKER_COMPOSE} build
-SERVE ?= ${DOCKER_COMPOSE} up --remove-orphans
-RUN ?= ${DOCKER_COMPOSE} run --rm
-SIGHUP ?= ${DOCKER_COMPOSE} kill -s SIGHUP
-
+RUN = ${DOCKER_COMPOSE} run --rm
 
 .PHONY: start
 start: serve
@@ -21,11 +17,11 @@ serve: serve.app
 
 .PHONY: serve.%
 serve.%:
-	${SERVE} ${*}
+	${DOCKER_COMPOSE} up --remove-orphans ${*}
 
 .PHONY: sighup.%
 sighup.%:
-	${SIGHUP} ${*}
+	${DOCKER_COMPOSE} kill -s SIGHUP ${*}
 
 .PHONY: run.%
 run.%:
@@ -41,7 +37,7 @@ run.app-shell:
 
 .PHONY: build
 build:
-	${BUILD}
+	${DOCKER_COMPOSE} build
 
 .PHONY: test
 test:
