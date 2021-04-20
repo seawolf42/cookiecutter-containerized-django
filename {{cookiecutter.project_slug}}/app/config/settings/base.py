@@ -61,7 +61,6 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
     # local apps
     "apps.accounts",
-    "apps.www",
     # third-party apps
     #   none
 )
