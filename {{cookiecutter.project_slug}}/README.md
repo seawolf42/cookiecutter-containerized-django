@@ -20,22 +20,48 @@ You will need accounts on the following platforms:
 
 -   [Chocolatey](https://chocolatey.org/install)
 
-## Initial Setup and Execution
+## Initial Setup and Bootstrapping (First Run on First Developer's System)
+
+Before the project can fully build, prerequisites need to be determined:
 
 ```bash
 make build
-make serve
+make app.reqs
 ```
 
-> API is available at <http://localhost:8000>.
+Continue to the **First Run on New System** steps below.
+
+## First Run on New System
+
+Build the full stack and start it:
+
+```bash
+make build serve
+# press `ctrl-c` to exit
+```
+
+> app URL: <http://localhost:8000>
+
+**Note**: due to a race condition, the databaswe might not be ready fast enough for the app container on the very first run (the database needs to run initial setup scripts that take several seconds). If you receive an error when loading the site, simply press `ctrl-c` and then `make serve` to re-start it.
 
 ## Subsequent Execution
 
 ```bash
 make serve
+# press `ctrl-c` to exit
 ```
 
-> API is available at <http://localhost:8001>
+> app URL: <http://localhost:8001>
+
+## Pausing/Suspending Development
+
+You can stop the project fully and re-start it again at a future time. To stop all containers and free ports:
+
+```bash
+make stop
+```
+
+This takes down any containers but leaves volumes (for database state and user uploads locally) intact. Note that services may start or stop automatically as you work on things and they are needed, so simply exiting the `make serve` process with `ctrl-c` may not suspend everything.
 
 ## Logging In
 
@@ -54,9 +80,10 @@ The app can also be run in WSGI mode; this configuration can be started by runni
 
 ```bash
 make serve.app-wsgi
+# press `ctrl-c` to exit
 ```
 
-> API is available at <http://localhost:8001>
+> app URL: <http://localhost:8001>
 
 ## Local Development
 
@@ -66,23 +93,13 @@ make serve.app-wsgi
 
 (TBD)
 
-## Pausing Development
-
-You can stop the project fully and re-start it again at a future time. To stop everything:
-
-```bash
-make stop
-```
-
-This takes down any containers but leaves volumes (for database state and user uploads locally) intact.
-
 ## Deploy
 
 (TBD)
 
 ## Tear-Down
 
-The application can be completely brought down by performing the following steps:
+The application can be completely removed by performing the following steps:
 
 ```bash
 docker-compose down

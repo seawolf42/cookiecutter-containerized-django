@@ -14,7 +14,7 @@ serve.safe: static.build
 
 .PHONY: reqs
 reqs:
-	${PIP_COMPILE} requirements.in
+	${PIP_COMPILE} -v requirements.in
 
 .PHONY: migrate.exec
 migrate.exec:
