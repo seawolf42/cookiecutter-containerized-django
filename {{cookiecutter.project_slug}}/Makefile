@@ -43,6 +43,10 @@ build:
 test:
 	@echo not implemented...
 
+.PHONY: app.%
+app.%:
+	${RUN} -w /project/app --entrypoint "make ${*}" app-shell
+
 .PHONY: data.%
 data.%: export DOCKER_RUN ?= ${RUN}
 data.%:
