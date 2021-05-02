@@ -22,20 +22,6 @@
     "*.html": "html",
     "**/templates/**/*.html": "django-html"
   },
-  "files.exclude": {
-    "app/collected-static": true,
-    "app/media": true,
-    ".devcontainer": true,
-    ".vscode": true,
-    ".editorconfig": true,
-    ".flake8": true,
-    ".gitignore": true,
-    ".prettierignore": true,
-    ".prettierrc": true,
-    ".vsls.json": true,
-    "docker-compose.yml": true,
-    "services": true,
-    "tools": true
-  },
+  "files.exclude": {},
   "search.exclude": {}
 }
