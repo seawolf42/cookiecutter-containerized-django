@@ -8,15 +8,19 @@ psycopg2-binary
 uwsgi
 whitenoise
 
+# pinned dependencies
+black==21.7b0
+
 # package management
 pip
 pip-tools
 
 # linting
-black==20.8b1
+black
 flake8
 
 # testing
 mock
 pytest
+pytest-django
 pytest-mock

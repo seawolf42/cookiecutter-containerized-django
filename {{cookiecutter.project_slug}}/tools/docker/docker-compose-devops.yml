@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  server:
+    extends:
+      service: shell
+    container_name: ${COMPOSE_PROJECT_NAME}-server
+    command: make -C src/server serve
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - '${PORT_SERVER_DEV}:8000'
+    environment:
+      - IS_LOCAL_ENVIRONMENT=true
+      - DEBUG=true
+      - DEBUG_TOOLBAR=true
+
+  server-wsgi:
+    extends:
+      service: shell
+    container_name: ${COMPOSE_PROJECT_NAME}-server-wsgi
+    command: make -C src/server serve.safe
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - '${PORT_SERVER_WSGI}:8000'
+    environment:
+      - IS_LOCAL_MEDIA_ALLOWED=true
+
+  db-shell:
+    image: ${DB_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}-db-shell
+    restart: always
+    depends_on:
+      - db
+    command: bash
+    volumes:
+      - ${PWD}/data:/project/data:rw
+    stdin_open: true
+    tty: true
+    environment:
+      - PGPASSWORD=${COMPOSE_PROJECT_NAME}
+    working_dir: /project/data

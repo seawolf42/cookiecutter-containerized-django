@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.1
--- Dumped by pg_dump version 13.1
+-- Dumped from database version 13.3
+-- Dumped by pg_dump version 13.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -130,6 +130,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 17	admin	0002_logentry_remove_auto_add	2021-04-02 16:12:03.017846+00
 18	admin	0003_logentry_add_action_flag_choices	2021-04-02 16:12:03.02827+00
 19	sessions	0001_initial	2021-04-02 16:12:03.039225+00
+20	accounts	0002_root_user	2021-08-19 10:07:15.774925+00
 \.
 
 
@@ -176,13 +177,6 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 24, true);
 
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public
---
-
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
-
-
---
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
@@ -193,7 +187,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 6, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 19, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 20, true);
 
 
 --

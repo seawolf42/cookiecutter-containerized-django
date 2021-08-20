@@ -1,7 +1,7 @@
 {
   "name": "{{ cookiecutter.project_name }} Shell",
-  "dockerComposeFile": ["../docker-compose.yml"],
-  "service": "app-shell",
+  "image": "{{ cookiecutter.project_slug }}_shell",
+  "mounts": ["source=${localWorkspaceFolder},target=/project,type=bind"],
   "workspaceFolder": "/project",
   "extensions": [
     "ms-azuretools.vscode-docker",
@@ -10,10 +10,10 @@
     "ms-python.python"
   ],
   "settings": {
-    "python.pythonPath": "/usr/local/bin/python",
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
     "python.formatting.provider": "black",
     "python.linting.flake8Enabled": true,
-    "terminal.integrated.shell.linux": null
+    "terminal.integrated.defaultProfile.linux": null
   },
   "forwardPorts": []
 }

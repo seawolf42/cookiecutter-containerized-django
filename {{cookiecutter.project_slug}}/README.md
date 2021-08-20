@@ -40,9 +40,9 @@ make build serve
 # press `ctrl-c` to exit
 ```
 
-> app URL: <http://localhost:8000>
+> server URL: <http://localhost:8000>
 
-**Note**: due to a race condition, the databaswe might not be ready fast enough for the app container on the very first run (the database needs to run initial setup scripts that take several seconds). If you receive an error when loading the site, simply press `ctrl-c` and then `make serve` to re-start it.
+**Note**: due to a race condition, the database might not be ready fast enough for the server container on the very first run (the database needs to run initial setup scripts that take several seconds). If you receive an error when loading the site, simply press `ctrl-c` and then `make serve` to re-start it.
 
 ## Subsequent Execution
 
@@ -51,7 +51,7 @@ make serve
 # press `ctrl-c` to exit
 ```
 
-> app URL: <http://localhost:8001>
+> server URL: <http://localhost:8001>
 
 ## Pausing/Suspending Development
 
@@ -74,16 +74,16 @@ The following accounts exist and can be logged in with username/password:
 | alice    | `alice`  |
 | bob      | `bob`    |
 
-## WSGI App
+## WSGI Server
 
-The app can also be run in WSGI mode; this configuration can be started by running the `app-wsgi` container:
+The server can also be run in WSGI mode; this configuration can be started by running the `server-wsgi` container:
 
 ```bash
-make serve.app-wsgi
+make serve.server-wsgi
 # press `ctrl-c` to exit
 ```
 
-> app URL: <http://localhost:8001>
+> server URL: <http://localhost:8001>
 
 ## Local Development
 
@@ -99,7 +99,7 @@ make serve.app-wsgi
 
 ## Tear-Down
 
-The application can be completely removed by performing the following steps:
+The project can be completely removed by performing the following steps:
 
 ```bash
 docker-compose down

@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  shell:
+    build:
+      context: ${PWD}
+      dockerfile: src/server/Dockerfile
+    container_name: ${COMPOSE_PROJECT_NAME}-shell
+    command: bash
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - server-pycache:/cache/python
+      - server-static:/cache/static
+      - server-media:/cache/media
+      - ${PWD}/src/server:/app:ro
+      - ${PWD}:/project
+    working_dir: /project
+    environment:
+      - PYTHONPYCACHEPREFIX=/cache/python
+      - SECRET_KEY=abcdefghijklmnopqrstuvwxyz
+      - DATABASE_URL=postgres://{{ cookiecutter.project_slug }}:{{ cookiecutter.project_slug }}@db/{{ cookiecutter.project_slug }}
+
+  db:
+    image: ${DB_IMAGE}
+    container_name: ${COMPOSE_PROJECT_NAME}-db
+    restart: always
+    volumes:
+      - db-data:/pgdata
+      - ${PWD}/data:/project/data:ro
+      - ${PWD}/tools/devops/db/initdb.d:/docker-entrypoint-initdb.d:ro
+    environment:
+      - POSTGRES_DB={{ cookiecutter.project_slug }}
+      - POSTGRES_USER={{ cookiecutter.project_slug }}
+      - POSTGRES_PASSWORD={{ cookiecutter.project_slug }}
+      - PGDATA=/pgdata
+
+networks:
+  default:
+    name: ${COMPOSE_PROJECT_NAME}-default
+
+volumes:
+  server-media: {}
+  server-pycache: {}
+  server-static: {}
+  db-data: {}

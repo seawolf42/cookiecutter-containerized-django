@@ -7,20 +7,19 @@ import pathlib
 BASE_DIR = pathlib.Path(__file__).parent
 vscode_settings_path = BASE_DIR.parent / ".vscode" / "settings.json"
 
-always_hide = ("app/collected-static", "app/media")
+always_hide = ("src/server/collected-static", "src/server/media")
 hideables = (
     ".devcontainer",
-    ".vscode",
     ".editorconfig",
+    ".envrc",
     ".flake8",
     ".gitignore",
     ".prettierignore",
     ".prettierrc",
+    ".vscode",
     ".vsls.json",
-    "docker-compose.yml",
-    "services",
-    "tools",
 )
+always_unsearchable = ()
 
 
 def _load_settings():
@@ -35,12 +34,13 @@ def _set_admin_excludes(settings, exclude):
             ((k, exclude) for k in hideables),
         )
     )
+    settings["search.exclude"] = dict(((k, True) for k in always_unsearchable))
 
 
 def _persist_settings(settings):
     with open(vscode_settings_path, "w") as fout:
         json.dump(settings, fout, indent=2)
-        fout.write('\n')
+        fout.write("\n")
 
 
 def main(exclude_hideables):

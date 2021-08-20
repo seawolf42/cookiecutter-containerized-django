@@ -22,6 +22,18 @@
     "*.html": "html",
     "**/templates/**/*.html": "django-html"
   },
-  "files.exclude": {},
+  "files.exclude": {
+    "src/server/collected-static": true,
+    "src/server/media": true,
+    ".devcontainer": true,
+    ".editorconfig": true,
+    ".envrc": true,
+    ".flake8": true,
+    ".gitignore": true,
+    ".prettierignore": true,
+    ".prettierrc": true,
+    ".vscode": true,
+    ".vsls.json": true
+  },
   "search.exclude": {}
 }

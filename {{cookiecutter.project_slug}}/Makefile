@@ -1,9 +1,13 @@
-PROJECT ?= {{ cookiecutter.project_slug }}
+export PROJECT ?= {{ cookiecutter.project_slug }}
 
 DOCKER ?= docker
-DOCKER_COMPOSE ?= docker-compose
+DOCKER_COMPOSE ?= docker-compose -f ${PWD}/tools/docker/docker-compose.yml -f ${PWD}/tools/docker/docker-compose-devops.yml
 
 RUN = ${DOCKER_COMPOSE} run --rm
+
+.PHONY: server.%
+server.%:
+	${RUN} -w /project/src/server --entrypoint "make ${*}" shell
 
 .PHONY: start
 start: serve
@@ -13,7 +17,7 @@ stop:
 	${DOCKER_COMPOSE} stop
 
 .PHONY: serve
-serve: serve.app
+serve: serve.server
 
 .PHONY: serve.%
 serve.%:
@@ -31,28 +35,35 @@ run.%:
 run.db-cli:
 	${RUN} --entrypoint "psql -h db -U {{ cookiecutter.project_slug }}" db-shell
 
-.PHONY: run.app-shell
-run.app-shell:
-	${RUN} --entrypoint bash app
+.PHONY: run.shell
+run.shell:
+	${RUN} --entrypoint bash shell
+
+.PHONY: shell
+shell: run.shell
 
 .PHONY: build
 build:
 	${DOCKER_COMPOSE} build
 
 .PHONY: test
-test:
-	@echo not implemented...
-
-.PHONY: app.%
-app.%:
-	${RUN} -w /project/app --entrypoint "make ${*}" app-shell
+test: src.test
 
 .PHONY: data.%
 data.%: export DOCKER_RUN ?= ${RUN}
 data.%:
 	${MAKE} -C data ${*}
 
+.PHONY: src.%
+src.%:
+	${RUN} -w /project/src --entrypoint "make ${*}" shell
+
 .PHONY: tools.%
 tools.%: export DOCKER_RUN ?= ${RUN}
 tools.%:
 	${MAKE} -C tools ${*}
+
+.PHONY: cleanup
+cleanup: stop
+	${DOCKER_COMPOSE} down
+	${DOCKER} volume rm $$(${DOCKER} volume ls -q -f dangling=true)

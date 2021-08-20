@@ -1,8 +1,7 @@
 PYTHON ?= python
-PIP_COMPILE ?= pip-compile --generate-hashes --allow-unsafe
 
 MANAGE ?= ${PYTHON} manage.py
-BLACK ?= ${PYTHON} -m black --line-length=120 --exclude='apps/migrations/*' .
+PYTEST ?= ${PYTHON} -m pytest
 
 .PHONY: serve
 serve:
@@ -12,23 +11,23 @@ serve:
 serve.safe: static.build
 	uwsgi
 
-.PHONY: reqs
-reqs:
-	${PIP_COMPILE} -v requirements.in
+.PHONY: test
+test:
+	${PYTEST}
 
-.PHONY: migrate.exec
-migrate.exec:
-	${MANAGE} migrate
+.PHONY: shell
+shell:
+	${MANAGE} shell
 
 .PHONY: migrate.build
 migrate.build:
 	${MANAGE} makemigrations
+
+.PHONY: migrate.exec
+migrate.exec:
+	${MANAGE} migrate
 	@echo ALSO REMEMBER TO DUMP SCHEMA IN FIXTURES
 
 .PHONY: static.build
 static.build:
 	${MANAGE} collectstatic --no-input
-
-.PHONY: beautify
-beautify:
-	${BLACK}

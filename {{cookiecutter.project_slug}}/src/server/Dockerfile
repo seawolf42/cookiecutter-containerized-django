@@ -1,4 +1,4 @@
-FROM python:3.9.3-buster
+FROM python:3.9.5-buster
 
 ENV PYTHONUNBUFFERED=1
 
@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y uwsgi && apt-get clean
 
 WORKDIR /project
 
-COPY ./requirements.txt /project
+COPY ../src/requirements/requirements.txt /project
 RUN pip install -r requirements.txt
 
 ENV UWSGI_WSGI_FILE=/app/config/wsgi.py \

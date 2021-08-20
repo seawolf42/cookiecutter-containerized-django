@@ -77,7 +77,7 @@ MIDDLEWARE = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # third-party
-    # none
+    #   none
 )
 
 TEMPLATES = (
