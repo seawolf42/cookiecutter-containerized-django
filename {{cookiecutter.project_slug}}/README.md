@@ -87,11 +87,39 @@ make serve.server-wsgi
 
 ## Local Development
 
-(TBD)
+The project is designed to be tightly integrated into Visual Studio Code (though you may use it with any editor you choose). In VS Code, you will have access to all tooling directly in the containers while developing, so no local installations are necessary other than VS Code itself and Docker.
+
+### Opening in Container Mode
+
+When you open the project in VS Code, you will be prompted to re-open in container mode. Just click "OK" and it will take it from there.
+
+**Note:** this will not work until after you have performed the first `make build`, `make src.reqs`, and `make build` cycle, as VS Code needs a container that already has various utilities and packages installed.
+
+### Hidden Files
+
+To make it easier to look at only the files relevant for normal development, many supporting files and folders are hidden in VS Code.
+
+To see all files:
+
+```bash
+make tools.editor.reveal
+```
+
+To hide supporting files:
+
+```bash
+make tools.editor.conceal
+```
 
 ## Test
 
-(TBD)
+To run all tests in the project:
+
+```bash
+make test
+```
+
+**Note:** The `server` project contains no tests to begin with; add `pytest`-compatible tests to your apps and they will be picked up automatically.
 
 ## Deploy
 
