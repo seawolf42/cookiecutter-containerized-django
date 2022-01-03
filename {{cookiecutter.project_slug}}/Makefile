@@ -7,7 +7,7 @@ RUN = ${DOCKER_COMPOSE} run --rm
 
 .PHONY: server.%
 server.%:
-	${RUN} -w /project/src/server --entrypoint "make ${*}" shell
+	${RUN} -w /project/src/server shell make ${*}
 
 .PHONY: start
 start: serve
@@ -33,11 +33,11 @@ run.%:
 
 .PHONY: run.db-cli
 run.db-cli:
-	${RUN} --entrypoint "psql -h db -U {{ cookiecutter.project_slug }}" db-shell
+	${RUN} db-shell psql -h db -U {{ cookiecutter.project_slug }}
 
 .PHONY: run.shell
 run.shell:
-	${RUN} --entrypoint bash shell
+	${RUN} shell bash
 
 .PHONY: shell
 shell: run.shell
@@ -56,7 +56,7 @@ data.%:
 
 .PHONY: src.%
 src.%:
-	${RUN} -w /project/src --entrypoint "make ${*}" shell
+	${RUN} -w /project/src shell make ${*}
 
 .PHONY: tools.%
 tools.%: export DOCKER_RUN ?= ${RUN}

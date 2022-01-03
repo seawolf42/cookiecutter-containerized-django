@@ -10,4 +10,4 @@ reset: script
 
 .PHONY: script
 script:
-	cd .. && ${RUN} --entrypoint "bash ${SCRIPT}" db-shell
+	cd .. && ${RUN} db-shell bash ${SCRIPT}

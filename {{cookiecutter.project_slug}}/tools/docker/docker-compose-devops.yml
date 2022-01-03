@@ -3,6 +3,7 @@ version: '3.9'
 services:
   server:
     extends:
+      file: ./docker-compose.yml
       service: shell
     container_name: ${COMPOSE_PROJECT_NAME}-server
     command: make -C src/server serve
@@ -18,6 +19,7 @@ services:
 
   server-wsgi:
     extends:
+      file: ./docker-compose.yml
       service: shell
     container_name: ${COMPOSE_PROJECT_NAME}-server-wsgi
     command: make -C src/server serve.safe

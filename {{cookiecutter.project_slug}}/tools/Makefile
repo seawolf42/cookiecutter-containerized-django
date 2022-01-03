@@ -1,4 +1,4 @@
-PYTHON ?= ${DOCKER_RUN} --entrypoint python --workdir /project/tools shell
+PYTHON ?= ${DOCKER_RUN} --workdir /project/tools shell python
 
 VSCODE_SETTINGS_REVEAL = ${PYTHON} -m vscode_settings_reveal
 
